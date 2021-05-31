@@ -1,0 +1,20 @@
+.node {
+    cursor: pointer;
+  }
+  
+  .node rect {
+    fill: #fff;
+    stroke: lightpink;
+    stroke-width: 1.5px;
+  }
+  
+  .node text {
+    font: 10px sans-serif;
+  }
+  
+  .link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1.5px;
+  }
