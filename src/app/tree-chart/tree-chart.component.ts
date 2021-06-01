@@ -98,12 +98,14 @@ export class TreeChartComponent implements OnInit {
             //console.log("CP1");
             //console.log(nodeEnter);
 
-            // Add Circle for the nodes
+            // Add cicular for the nodes
             nodeEnter.append('rect')
             .attr('class', 'node')
+            .attr('xmlns','http://www.w3.org/2000/svg')
             .attr('height', 30)
             .attr('width', 100)
             .attr('rx', 15)
+            .text(function(d){ return d.data.name;})
             .attr("transform", function(d) {
               return "translate(" + 0 + "," + -15 + ")";})
             .style("fill", function(d) {
@@ -111,8 +113,24 @@ export class TreeChartComponent implements OnInit {
                 return d._children ? "lightsteelblue" : "#fff";
             });
 
+            var nodeEnter2 = nodeEnter.append('foreignObject')
+              .attr('class','foNode')
+              .attr('height', 30)
+              .attr('width', 100)
+              .attr('rx', 15)
+              .attr("transform", function(d) {
+                return "translate(" + 0 + "," + -15 + ")";});
+
+            nodeEnter2.append('xhtml:div')
+            .attr('xmlns','http://www.w3.org/1999/xhtml')
+            .attr('class','nodeText')
+            .text('div value');
+
+            
+
+
           // Add labels for the nodes
-          nodeEnter.append('text')
+          /* nodeEnter.append('text')
             .attr("dy", ".35em")
             .attr("x", function(d) {
                 return d.children || d._children ? 13 : 13;
@@ -123,7 +141,7 @@ export class TreeChartComponent implements OnInit {
             .text(function(d) { 
               var nodeSign =  d._children ? "+  " : "-  ";
               return nodeSign + d.data.name  ; });
-
+ */
           /* To make +/- sign appear on end of node 
           nodeEnter.append('text')
             .attr("dy", ".35em")
@@ -139,7 +157,7 @@ export class TreeChartComponent implements OnInit {
               .attr("dx", 8)
               .attr("dy", 3)
               .style("opacity",0)
-              .text(function(d) { return "Demo Tooltip"; })
+              .text(function(d) { return "Demo"; })
 
           // UPDATE
           var nodeUpdate = nodeEnter.merge(node);
@@ -159,10 +177,10 @@ export class TreeChartComponent implements OnInit {
           })
           .attr('cursor', 'pointer');
 
-          nodeUpdate.select('text')
+         /*  nodeUpdate.select('text')
           .text(function(d) { 
             var nodeSign =  d._children ? "+  " : "-  ";
-            return nodeSign + d.data.name  ; });
+            return nodeSign + d.data.name  ; }); */
 
           
           // Remove any exiting nodes

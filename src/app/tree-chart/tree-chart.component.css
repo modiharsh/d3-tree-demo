@@ -13,7 +13,13 @@
     stroke-width: 2.5px;
     
   }
-  
+
+  .node text:hover {
+    stroke : palevioletred;
+    stroke-width: 2.5px;
+
+  }
+
   .node text {
     font: 10px sans-serif;
   }
@@ -46,3 +52,26 @@
     z-index: 5;
     visibility: hidden; 
 }
+
+.foNode{
+    stroke: lightpink;
+    stroke-width: 1.5px;
+}
+
+/* .nodeText{
+  height: 30px;
+  width: 100px;
+  background-color: powderblue;
+  border-radius: 15px;
+  border-width: 1.5px;
+  border: lightpink;
+}
+
+.nodeText:hover{
+  height: 30px;
+  width: 100px;
+  background-color: powderblue;
+  border-radius: 15px;
+  border: palevioletred;
+  border-width: 2.5px;
+} */
