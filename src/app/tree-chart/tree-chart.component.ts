@@ -40,6 +40,21 @@ export class TreeChartComponent implements OnInit {
       .attr("class", "tooltip")
       .style("opacity", 1e-6);
 
+    var toggle = d3.select("figure#node-tree").append("button")
+      .attr("class","tracebutton")
+      .attr("height", 30)
+      .attr("width", 100)
+      .text("Trace Node")
+      .on("click",startTrace);
+
+    var resetButton  = d3.select("figure#node-tree").append("button")
+    .attr("class","tracebutton")
+    .attr("height", 30)
+    .attr("width", 100)
+    .text("Reset Nodes")
+    .on("click",resetNodes);
+
+
     var treemap = d3.tree()
       .size([this.height, this.width]);
     
@@ -65,8 +80,9 @@ export class TreeChartComponent implements OnInit {
             
             // ****************** Nodes section ***************************
 
+            var nonHighlightedNodes = nodes.concat(this.nodeListToTrack).filter(item => !nodes.includes(item) || !this.nodeListToTrack.includes(item));
             // Update the nodes...
-            
+            console.log(nonHighlightedNodes);
             var node = this.svg.selectAll('g.node')
             .data(nodes, function(d) { return  d.id || (d.id = ++i); });
             
@@ -139,7 +155,6 @@ export class TreeChartComponent implements OnInit {
             var nodeSign =  d._children ? "+  " : "-  ";
             return nodeSign + d.data.name  ; });
 
-          
           // Remove any exiting nodes
           var nodeExit = node.exit().transition()
             .duration(duration)
@@ -156,14 +171,14 @@ export class TreeChartComponent implements OnInit {
           nodeExit.select('text')
           .style('fill-opacity', 1e-6);
 
+          
             // ****************** links section ***************************
         
-            console.log(this.nodeListToTrack);
+            
             this.nodeListToTrack.pop();
 
             var nonHighlightedLinks = links.concat(this.nodeListToTrack).filter(item => !links.includes(item) || !this.nodeListToTrack.includes(item));
             
-            console.log(nonHighlightedLinks);
         // Update the links...
         var link = this.svg.selectAll('path.highlight-link')
         .data(this.nodeListToTrack, function(d) { return d.id; });
@@ -392,8 +407,8 @@ export class TreeChartComponent implements OnInit {
 
     }
     
-    traceNode(root.children[1].children[1].children[0]);
-    //traceNode(root);
+    
+    
       // Collapse the node and all it's children
       function collapse(d) {
         //console.log(d);
@@ -410,8 +425,6 @@ export class TreeChartComponent implements OnInit {
         d.y0 = d.y;
 
       }
-
-      
 
         // Creates a curved (diagonal) path from parent to the child nodes
       function diagonal(s, d) {
@@ -438,7 +451,7 @@ export class TreeChartComponent implements OnInit {
         
         
         updateNode(d);
-        
+        //traceNode(root);
       }
 
       function mouseover(event,d) {
@@ -487,6 +500,14 @@ export class TreeChartComponent implements OnInit {
         
       }
 
+
+      function startTrace(){
+        traceNode(root.children[1].children[2]);
+      }
+
+      function resetNodes(){
+        traceNode(root);
+      }
   }
 
   private data = { name: "rootNode",

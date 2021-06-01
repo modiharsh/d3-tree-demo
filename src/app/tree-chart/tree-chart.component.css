@@ -2,7 +2,7 @@
     cursor: pointer;
   }
   
-  .node rect {
+  .node :not(text) {
     fill: #fff;
     stroke: lightpink;
     stroke-width: 1.5px;
@@ -29,6 +29,12 @@
     fill: none;
     stroke: rgb(47, 50, 243);
     stroke-opacity: 0.8;
+    stroke-width: 2.5px;
+  }
+
+  .highlight-node :not(text) {
+    fill: #fff;
+    stroke: rgb(47, 50, 243);
     stroke-width: 2.5px;
   }
 
