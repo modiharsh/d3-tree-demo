@@ -44,7 +44,7 @@ export class TreeChartComponent implements OnInit {
     var treemap = d3.tree()
       .size([this.height, this.width]);
     
-    root = d3.hierarchy(this.largedata);
+    root = d3.hierarchy(this.data);
     root.x0 = this.height / 2;
     root.y0 = 0;
     
