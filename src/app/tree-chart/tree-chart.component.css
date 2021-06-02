@@ -2,6 +2,13 @@
     cursor: pointer;
   }
   
+  .node rect, .highlight-node rect{
+    width: 120px;
+    height: 30px;
+    
+  }
+
+  
   .node :not(text) {
     fill: #fff;
     stroke: lightpink;
@@ -17,6 +24,10 @@
   .node text {
     font: 10px sans-serif;
   }
+
+  .highlight-node text {
+    font: 12px sans-serif;
+  }
   
   .link {
     fill: none;
@@ -29,7 +40,7 @@
     fill: none;
     stroke: rgb(47, 50, 243);
     stroke-opacity: 0.8;
-    stroke-width: 2.5px;
+    stroke-width: 2px;
   }
 
   .highlight-node :not(text) {
@@ -58,7 +69,7 @@
     stroke-width: 1.5px;
 }
  */
-/* .nodeText{
+.nodeText{
   height: 30px;
   width: 100px;
   background-color: powderblue;
@@ -66,7 +77,7 @@
   border-width: 1.5px;
   border: lightpink;
 }
-
+/*
 .nodeText:hover{
   height: 30px;
   width: 100px;
@@ -75,3 +86,17 @@
   border: palevioletred;
   border-width: 2.5px;
 } */
+
+.menubutton{
+  
+  height: 25px;
+  width: 120px;
+  border-width: 1.5px;
+  margin: 5px;
+  
+}
+
+.inputbox{
+  height:25px;
+  padding: 2px 5px;
+}
