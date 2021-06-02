@@ -13,7 +13,7 @@ export class TreeChartComponent implements OnInit {
 
   private svg ;
   private margin = 50;
-  private width = 1000 - (this.margin * 2);
+  private width = 750 - (this.margin * 2);
   private height = 500 - (this.margin * 2);
   private nodeListToTrack : d3.HierarchyPointNode<any>[];
   private nodeList : d3.HierarchyPointNode<any>[];
@@ -44,7 +44,7 @@ export class TreeChartComponent implements OnInit {
     var treemap = d3.tree()
       .size([this.height, this.width]);
     
-    root = d3.hierarchy(this.data);
+    root = d3.hierarchy(this.largedata);
     root.x0 = this.height / 2;
     root.y0 = 0;
     
