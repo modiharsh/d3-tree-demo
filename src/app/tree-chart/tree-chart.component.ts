@@ -13,7 +13,7 @@ export class TreeChartComponent implements OnInit {
 
   private svg ;
   private margin = 50;
-  private width = 750 - (this.margin * 2);
+  private width = 1000 - (this.margin * 2);
   private height = 500 - (this.margin * 2);
   private nodeListToTrack : d3.HierarchyPointNode<any>[];
   private nodeList : d3.HierarchyPointNode<any>[];
@@ -48,7 +48,7 @@ export class TreeChartComponent implements OnInit {
     root.x0 = this.height / 2;
     root.y0 = 0;
     
-    //root.children.forEach(collapse);
+    root.children.forEach(collapse);
     root.children.forEach(initPrev);
     
     this.nodeListToTrack = [];
@@ -355,14 +355,7 @@ export class TreeChartComponent implements OnInit {
                 return "translate(" + source.y + "," + source.x + ")";
             })
             .remove();
-
-          // On exit reduce the node circles size to 0
-          nodeExit.select('circle')
-          .attr('r', 1e-6);
-
-          // On exit reduce the opacity of text labels
-          nodeExit.select('text')
-          .style('fill-opacity', 1e-6); 
+          
 
             // ****************** links section ***************************
 
@@ -426,12 +419,16 @@ export class TreeChartComponent implements OnInit {
     .attr("class","menubutton")
     .text("Search Node")
     .on("click",() => {
+      
       var inputNodeName =(<HTMLInputElement> document.getElementById("nodeInputBox")).value;
             
-      this.nodeList.forEach(node => {
+      this.nodeList.some(node => {
         if(node.data['name'].toLowerCase() == inputNodeName.toLowerCase()){
+          this.nodeListToTrack = [];
+          traceNode(root,null);
           traceNode(node,'single');
-          return;
+          return true;
+          
         }
       });
     });
@@ -442,10 +439,10 @@ export class TreeChartComponent implements OnInit {
       .on("click",() => { 
         var inputNodeName =(<HTMLInputElement> document.getElementById("nodeInputBox")).value;
         if (inputNodeName && inputNodeName != ""){
-          this.nodeList.forEach(node => {
+          this.nodeList.some(node => {
             if(node.data['name'].toLowerCase() == inputNodeName.toLowerCase()){
               traceNode(node,'full');
-              return;
+              return true;
             }
           })
         }
@@ -566,5 +563,54 @@ export class TreeChartComponent implements OnInit {
   };
 
 
+  private largedata = { name: "FrtbSBMCalculator",
+    children: [
+        {
+            name: "FrtbSBMPositions",
+            children: [
+              {
+                name: "FrtbPreprocess",
+                children: [
+                  {
+                    name: "FrtbPositions",
+                    children: [
+                      {
+                        name: "ZincFrtbImporter"
+                      }
+                    ]
+                  }
+                ]
+              }
+
+            ]
+        },
+        {
+          name: "FrtbRefDataGroup",
+          children: [
+            {
+              name: "FrtbRefData1",
+              children: [
+                { name: "RdmDataImporter" }
+              ]
+            },
+            {
+              name: "FrtbRefData2",
+              children: [
+                { name: "RdmDataImporter" }
+              ]
+            },
+            {
+              name: "FrtbRefData3",
+              children: [
+                { name: "RdmDataImporter" }
+              ]
+            },
+          ]
+        }
+        
+        
+    ]
+  };
+  
 
 }
